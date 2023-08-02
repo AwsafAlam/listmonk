@@ -116,7 +116,7 @@ run_migrations(){
 
 start_services(){
 	info "starting app"
-	docker-compose up -d app
+	docker-compose up -d
 }
 
 show_output(){

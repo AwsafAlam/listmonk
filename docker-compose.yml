@@ -39,34 +39,35 @@ services:
       - ./config.toml:/listmonk/config.toml
 
   nginx:
-    image: nginx:mainline-alpine
+    image: nginx:latest
     restart: unless-stopped
     ports:
       - '80:80'
       - '443:443'
     volumes:
-      - ./nginx:/etc/nginx/conf.d
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      # - ./nginx:/etc/nginx/conf.d
     networks:
       - listmonk
     depends_on:
       - app
     command: '/bin/sh -c ''while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g "daemon off;"'''
 
-  demo-db:
-    container_name: listmonk_demo_db
-    <<: *db-defaults
+  # demo-db:
+  #   container_name: listmonk_demo_db
+  #   <<: *db-defaults
 
-  demo-app:
-    <<: *app-defaults
-    container_name: listmonk_demo_app
-    command:
-      [
-        sh,
-        -c,
-        'yes | ./listmonk --install --config config-demo.toml && ./listmonk --config config-demo.toml',
-      ]
-    depends_on:
-      - demo-db
+  # demo-app:
+  #   <<: *app-defaults
+  #   container_name: listmonk_demo_app
+  #   command:
+  #     [
+  #       sh,
+  #       -c,
+  #       'yes | ./listmonk --install --config config-demo.toml && ./listmonk --config config-demo.toml',
+  #     ]
+  #   depends_on:
+  #     - demo-db
 
 networks:
   listmonk:
