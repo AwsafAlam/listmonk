@@ -111,7 +111,7 @@ run_migrations(){
 	info "running migrations"
 	# docker-compose up -d db
 	# while ! is_healthy listmonk_db; do sleep 3; done
-	docker-compose run --rm app ./listmonk --install
+	# docker-compose run --rm app ./listmonk --install
 }
 
 start_services(){
