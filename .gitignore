@@ -8,3 +8,7 @@ config.toml
 node_modules
 listmonk
 dist/*
+
+fullchain.pem
+privkey.pem
+
